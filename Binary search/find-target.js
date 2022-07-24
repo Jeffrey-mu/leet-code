@@ -1,6 +1,7 @@
+//https://leetcode.cn/problems/binary-search/
 function findTarget(nums, target) {
-    return findRecursion(nums, target, 0, nums.length - 1);
-    // return whileFind(nums, target)
+    // return findRecursion(nums, target, 0, nums.length - 1);
+    return whileFind(nums, target);
 }
 function findRecursion(nums, target, left, right) {
     if (left > right)
@@ -16,18 +17,19 @@ function findRecursion(nums, target, left, right) {
     }
 }
 function whileFind(nums, target) {
-    var left = 0, reight = nums.length - 1, mid = Math.floor(reight + left) / 2;
-    while (left < reight) {
+    var left = 0, right = nums.length - 1;
+    while (left <= right) {
+        var mid = Math.floor((right + left) / 2);
         if (nums[mid] === target) {
             return mid;
         }
         else if (nums[mid] < target) {
-            left = mid - 1;
+            left = mid + 1;
         }
-        else if (nums[mid] > target) {
-            reight = mid + 1;
+        else {
+            right = mid - 1;
         }
-        return -1;
     }
+    return -1;
 }
-console.log(findTarget([1, 2, 3], 5));
+console.log(findTarget([-1, 0, 3, 5, 9, 12], 9));
